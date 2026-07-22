@@ -1,23 +1,27 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
-from apps.accounts.forms.login import LoginForm
-from apps.accounts.forms.register import RegisterForm
-from apps.accounts.models.user import User
+from django.contrib.auth import authenticate, login
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 def login_view(request):
     if request.method == "POST":
-        form = LoginForm(request.POST)
+        username = request.POST.get("username")
+        password = request.POST.get("password")
 
-        if form.is_valid():
+        user = authenticate(
+            request,
+            username=username,
+            password=password,
+        )
+
+        if user:
+            login(request, user)
             return redirect("dashboard")
-
-    else:
-        form = LoginForm()
 
     return render(
         request,
         "accounts/login.html",
-        {"form": form},
     )
 
 def register_view(request):
