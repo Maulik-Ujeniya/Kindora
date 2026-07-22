@@ -1,6 +1,8 @@
 {% extends "layouts/auth_base.html" %}
 
-{% block title %}Register{% endblock %}
+{% block title %}
+Register
+{% endblock %}
 
 {% block content %}
 
@@ -8,19 +10,7 @@
 
 <form method="post">
     {% csrf_token %}
-
-    <input type="text" placeholder="Username">
-
-    <br><br>
-
-    <input type="email" placeholder="Email">
-
-    <br><br>
-
-    <input type="password" placeholder="Password">
-
-    <br><br>
-
+    {{ form.as_p }}
     <button type="submit">Register</button>
 </form>
 
