@@ -6,3 +6,5 @@ urlpatterns = [
     path("", include("apps.core.urls")),
     path("accounts/", include("apps.accounts.urls")),
 ]
+
+handler404 = "apps.core.views.home.page_not_found_view"
